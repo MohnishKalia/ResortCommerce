@@ -35,7 +35,7 @@ const Home = () => {
                     <CartContext.Consumer>
                         {([resorts]) =>
                             resorts.map(({ id, imgUrl, heading, description }) =>
-                                <Card>
+                                <Card key={id}>
                                     <Card.Img variant="top" src={imgUrl} />
                                     <Card.Body>
                                         <Card.Title>{heading}</Card.Title>

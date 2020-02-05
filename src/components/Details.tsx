@@ -27,7 +27,7 @@ const Details = () => {
         <Container>
             <Row>
                 {resorts.filter(res => res.id.toString() === id).map(res =>
-                    <>
+                    <React.Fragment key={res.id}>
                         <Col md={12}><h1 className="text-center">{res.heading}</h1></Col>
                         <Col md={4}>
                             <img src={res.imgUrl} alt="loading..." className="w-100" />
@@ -42,7 +42,7 @@ const Details = () => {
                         <Col md={6}>
                             {res.description}
                         </Col>
-                    </>
+                    </React.Fragment>
                 )}
             </Row>
             <Row>

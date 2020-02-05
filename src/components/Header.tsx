@@ -19,7 +19,7 @@ const Header = () => {
                         <Link to="/" className="mr-3 nav-link">Marketplace</Link>
                         <Link to="/cart" className="btn btn-outline-secondary">
                             <FontAwesomeIcon icon={faCartPlus} className="mr-2" />
-                            Checkout
+                            Cart
                                 <CartContext.Consumer>
                                 {([resorts]) => {
                                     const count = resorts.reduce((i, res) => i + res.quantity, 0);

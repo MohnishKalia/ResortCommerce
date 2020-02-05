@@ -2,6 +2,38 @@ import React from 'react'
 import { Container, Form, Button, Dropdown, DropdownButton } from 'react-bootstrap'
 const Checkout = () => {
     const [ph, setPh] = React.useState(123_456_7890);
+    const fakePay = () => {
+        const supportedInstruments = [{
+            supportedMethods: ['basic-card'],
+            data: {
+                supportedNetworks: [
+                    'diners', 'jcb', 'unionpay'
+                ]
+            }
+        }];
+
+        // Checkout details
+        const details = {
+            displayItems: [{
+                label: 'Mr. Snugglepuffs\' amount',
+                amount: { currency: 'USD', value: '65.00' }
+            }, {
+                label: 'Life insurance savings',
+                amount: { currency: 'GBP', value: '-15.00' }
+            }],
+            total: {
+                label: 'Total due',
+                amount: { currency: 'RUB', value: '55.00' }
+            }
+        };
+
+        // 1. Create a `PaymentRequest` instance
+        const request = new PaymentRequest(supportedInstruments, details);
+
+        // 2. Show the native UI with `.show()`
+        request.show()
+            .then(result => result.complete('fail'));
+    }
     return (
         <Container>
             <Form>
@@ -13,7 +45,7 @@ const Checkout = () => {
                     <Form.Label>What is your age?</Form.Label>
                     <DropdownButton id="dropdown-basic-button" title="Dropdown button">
                         {Array(100).fill(0).map((_, idx) => idx).map(i =>
-                            <Dropdown.Item>{i}</Dropdown.Item>
+                            <Dropdown.Item key={i}>{i}</Dropdown.Item>
                         )}
                     </DropdownButton>
                 </Form.Group>
@@ -28,7 +60,7 @@ const Checkout = () => {
                     <Form.Control type="password" min={1000000000} max={9999999999} />
                 </Form.Group>
             </Form>
-            <Button variant="primary">"""Pay"""</Button>
+            <Button variant="primary" onClick={() => fakePay()}>"""Pay"""</Button>
         </Container>
     )
 }
