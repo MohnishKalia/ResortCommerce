@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Form, Button, Dropdown, DropdownButton } from 'react-bootstrap'
 const Checkout = () => {
-    const [ph, setPh] = React.useState(123_456_7890);
+    const [ph, setPh] = React.useState(1234567890);
     const fakePay = () => {
         const supportedInstruments = [{
             supportedMethods: ['basic-card'],
@@ -39,7 +39,7 @@ const Checkout = () => {
             <Form>
                 <Form.Group>
                     <Form.Label>Phone Number:{' '}{ph}</Form.Label>
-                    <Form.Control type="range" min={100_000_0000} max={999_999_9999} onChange={(event: React.FormEvent<HTMLInputElement>) => setPh(event.currentTarget.valueAsNumber)} />
+                    <Form.Control type="range" min={1000000000} max={9999999999} onChange={(event: React.FormEvent<HTMLInputElement>) => setPh(event.currentTarget.valueAsNumber)} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>What is your age?</Form.Label>
