@@ -1,24 +1,42 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, Container, Badge } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus, faRupeeSign } from '@fortawesome/free-solid-svg-icons'
+import CartContext from '../CartContext'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <Navbar bg="light" expand="md">
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-            </Navbar.Collapse>
+        <Navbar bg="dark" expand="md" variant="dark">
+            <Container>
+                <Navbar.Brand href="#home">
+                    <FontAwesomeIcon icon={faRupeeSign} className="mr-2" />
+                    resCohost
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ml-auto">
+                        <Link to="/" className="mr-3 nav-link">Marketplace</Link>
+                        <Link to="/cart" className="btn btn-outline-secondary">
+                            <FontAwesomeIcon icon={faCartPlus} className="mr-2" />
+                            Checkout
+                                <CartContext.Consumer>
+                                {([resorts]) => {
+                                    const count = resorts.reduce((i, res) => i + res.quantity, 0);
+                                    return (
+                                        <>
+                                            {count !== 0 &&
+                                                <Badge variant="danger" className="ml-2">
+                                                    {count}
+                                                </Badge>}
+                                        </>
+                                    );
+                                }}
+                            </CartContext.Consumer>
+                        </Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
         </Navbar>
     )
 }

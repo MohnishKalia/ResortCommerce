@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat&display=swap');
+
+body {
+    font-family:'Lato', 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+}
+
+nav {
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+}
+
+.carousel-inner > .carousel-item {
+    height: 70vh;
+  }
+  
+  .carousel-caption {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+  }
+  .carousel-caption h1 {
+    font-size: 3rem;
+    text-shadow: 0.1rem 0.1rem 0.3rem black;
+  }
+  .carousel-caption p {
+    font-size: 1.5rem;
+    text-shadow: 0.1rem 0.1rem black;
+  }
+  
+  .carousel-item:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.4);
+  }
