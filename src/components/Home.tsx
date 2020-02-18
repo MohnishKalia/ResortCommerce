@@ -1,12 +1,13 @@
 import React from 'react'
 import { Container, Carousel, Card, CardColumns } from 'react-bootstrap'
-import CartContext from '../CartContext'
+import CartContext from '../context/CartContext'
 import Burj from '../images/burj.jpg'
 import NYSE from '../images/ny-stock-exchange-2.jpg'
 import SE from '../images/stockmarket.jpg'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
+    const { products } = React.useContext(CartContext);
     return (
         <>
             <Carousel>
@@ -32,22 +33,20 @@ const Home = () => {
             <h1 className="my-5 text-center text-capitalize">Check out our full resort lineup</h1>
             <Container>
                 <CardColumns>
-                    <CartContext.Consumer>
-                        {([resorts]) =>
-                            resorts.map(({ id, imgUrl, heading, description }) =>
-                                <Card key={id}>
-                                    <Card.Img variant="top" src={imgUrl} />
-                                    <Card.Body>
-                                        <Card.Title>{heading}</Card.Title>
-                                        <Card.Text className="text-truncate">{description}</Card.Text>
-                                    </Card.Body>
-                                    <Card.Footer className="text-center">
-                                        <Link to={`/details/${id}`} className="btn btn-primary">View Resort</Link>
-                                    </Card.Footer>
-                                </Card>
-                            )
-                        }
-                    </CartContext.Consumer>
+                    {
+                        products.map(({ id, imgUrl, heading, description }) =>
+                            <Card key={id}>
+                                <Card.Img variant="top" src={imgUrl} />
+                                <Card.Body>
+                                    <Card.Title>{heading}</Card.Title>
+                                    <Card.Text className="text-truncate">{description}</Card.Text>
+                                </Card.Body>
+                                <Card.Footer className="text-center">
+                                    <Link to={`/details/${id}`} className="btn btn-primary">View Resort</Link>
+                                </Card.Footer>
+                            </Card>
+                        )
+                    }
                 </CardColumns>
             </Container>
         </>

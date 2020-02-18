@@ -11,13 +11,19 @@ import Cart from './components/Cart'
 import Details from './components/Details'
 import Checkout from './components/Checkout'
 
-import CartContext from './CartContext'
+import CartContext from './context/CartContext'
 import Resorts from './Items'
+import ShopReducer from './context/Reducers';
 
 const App = () => {
-  const cartHook = React.useState(Resorts);
+  const [cartState, dispatch] = React.useReducer(ShopReducer, { products: Resorts, cart: [], addProductToCart: () => { }, removeProductFromCart: () => { } });
   return (
-    <CartContext.Provider value={cartHook}>
+    <CartContext.Provider value={{
+      products: Resorts,
+      cart: cartState.cart,
+      addProductToCart: product => dispatch({ type: "ADD_PRODUCT", product }),
+      removeProductFromCart: productId => dispatch({ type: "REMOVE_PRODUCT", productId })
+    }}>
       <Router>
         <Header />
         <Switch>

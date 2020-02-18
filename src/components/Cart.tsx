@@ -1,10 +1,10 @@
 import React from 'react'
 import { Table, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import CartContext from '../CartContext'
+import CartContext from '../context/CartContext'
 
 const Cart = () => {
-    const [resorts] = React.useContext(CartContext);
+    const { cart } = React.useContext(CartContext);
     return (
         <Container>
             <Table responsive="md">
@@ -16,7 +16,7 @@ const Cart = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {resorts.map(({ heading, description, quantity }) =>
+                    {cart.map(({ product: { heading, description }, quantity }) =>
                         <React.Fragment key={heading}>
                             {quantity > 0 &&
                                 <tr>
