@@ -1,6 +1,5 @@
 import React from "react";
 import { Resort } from '../Items'
-import { Action } from './Reducers'
 
 export type Shop = {
     products: Resort[],

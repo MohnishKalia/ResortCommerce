@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import CartContext from '../context/CartContext'
+import ResortQuantity from './ResortQuantity'
 
 const Cart = () => {
     const { cart } = React.useContext(CartContext);
@@ -16,13 +17,13 @@ const Cart = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cart.map(({ product: { heading, description }, quantity }) =>
+                    {cart.map(({ product: { heading, description, id }, quantity }) =>
                         <React.Fragment key={heading}>
                             {quantity > 0 &&
                                 <tr>
                                     <td>{heading}</td>
                                     <td className="text-truncate" style={{ maxWidth: '30vw' }}>{description}</td>
-                                    <td>{quantity}</td>
+                                    <td><ResortQuantity resId={id} /></td>
                                 </tr>
                             }
                         </React.Fragment>

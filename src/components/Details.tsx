@@ -1,15 +1,15 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom';
 import CartContext from '../context/CartContext'
-import { Container, Row, Col, Pagination } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import ResortQuantity from './ResortQuantity';
 
 const Details = () => {
     const { id } = useParams();
 
-    const { products, cart, addProductToCart, removeProductFromCart } = React.useContext(CartContext);
+    const { products } = React.useContext(CartContext);
 
     const res = products.find(res => res.id === Number(id));
-    const cartItem = cart.find(r => r.product.id === Number(id));
 
     return (
         <Container>
@@ -21,11 +21,7 @@ const Details = () => {
                             <img src={res.imgUrl} alt="loading..." className="w-100" />
                         </Col>
                         <Col md={2} className="mt-4 mt-md-0">
-                            <Pagination className="justify-content-center">
-                                <Pagination.Item onClick={() => removeProductFromCart(res.id)}>-</Pagination.Item>
-                                <Pagination.Item>{cartItem ? cartItem.quantity : 0}</Pagination.Item>
-                                <Pagination.Item onClick={() => addProductToCart(res)}>+</Pagination.Item>
-                            </Pagination>
+                            <ResortQuantity resId={res.id} />
                         </Col>
                         <Col md={6}>
                             {res.description}
