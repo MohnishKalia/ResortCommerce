@@ -16,7 +16,7 @@ import Resorts from './Items'
 import ShopReducer from './context/Reducers';
 
 const App = () => {
-  const [cartState, dispatch] = React.useReducer(ShopReducer, { products: Resorts, cart: [], addProductToCart: () => { }, removeProductFromCart: () => { } });
+  const [cartState, dispatch] = React.useReducer(ShopReducer, { products: Resorts, cart: JSON.parse(localStorage.getItem('cart') || '[]'), addProductToCart: () => { }, removeProductFromCart: () => { } });
   return (
     <CartContext.Provider value={{
       products: Resorts,

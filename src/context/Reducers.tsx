@@ -14,6 +14,7 @@ const addProductToCart = (product: Resort, state: Shop): Shop => {
         updatedItem.quantity++;
         updatedCart[updatedItemIndex] = updatedItem;
     }
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
     return { ...state, cart: updatedCart };
 };
 
@@ -31,6 +32,7 @@ const removeProductFromCart = (productId: number, state: Shop): Shop => {
     } else {
         updatedCart[updatedItemIndex] = updatedItem;
     }
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
     return { ...state, cart: updatedCart };
 };
 
